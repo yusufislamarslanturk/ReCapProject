@@ -1,5 +1,6 @@
 ﻿using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -40,10 +41,10 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public List<Car> GetAll(Expression<Func<Car, bool>>filter=null)
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
             using (CarsDBContext context = new CarsDBContext())
-                {
+            {
                 return filter == null
               ? context.Set<Car>().ToList()
               : context.Set<Car>().Where(filter).ToList();
@@ -51,14 +52,34 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public void Update(Car entity)
+        public List<CarDetailDto> GetCarDetails()
         {
             using (CarsDBContext context = new CarsDBContext())
             {
-                var updatedEntity = context.Entry(entity);
-                updatedEntity.State = EntityState.Modified;
-                context.SaveChanges();
+                var result = from c in context.cars
+                             join b in context.brands
+                             on c.BrandId equals b.BrandId
+                             join clr in context.colors on c.ColorId equals clr.ColorId
+                             select new CarDetailDto
+                             {
+                                 CarId = c.CarId,
+                                 BrandId = b.BrandId,
+                                 BrandName = b.BrandName,
+                                 DailyPrice = c.DailyPrice,
+                                 ColorName = clr.ColorName,
+                                 CarName =c.CarName,
+                                 Description=c.Description
+                                 
+                             };
+                return result.ToList();
             }
+
+
+        }
+
+        public void Update(Car entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }
