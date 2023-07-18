@@ -38,8 +38,8 @@ namespace ConsoleUI
                 RentalId = 2,
                 CarId = 3,
                 CustomerId = 2,
-                RentDate = new DateTime(2023, 05, 17),
-                ReturnDate = new DateTime(2023, 06, 28)
+                RentDate = DateTime.Now,
+                ReturnDate = DateTime.Now.AddDays(1)
             });
         }
     }
