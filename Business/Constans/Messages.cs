@@ -36,5 +36,17 @@ namespace Business.Constans
 
         // -------------- RENTAL MESSAGES ---------------
         public static string CarNotReturn = "İstediğiniz araç henüz teslim edilmemiş";
+
+        public static string ImageAdded = "Resim Eklendi.";
+
+        public static string CarImageDeleted = "Resim Silindi.";
+
+        public static string ImagesListedById = "Resimler id'ye göre listelendi.";
+
+        public static string ImageUpdated = "resimler güncellendi.";
+
+        public static string CarImageLimitReached = "bir araç için maksimum sayıda yükleme yaptınız.";
+
+        public static string CarImageAlreadyHave = "Bu resim daha önce eklenmişti.";
     }
 }

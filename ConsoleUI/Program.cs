@@ -11,7 +11,8 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             //carsMethod();
-            AddRental();
+            //AddRental();
+            //DetailTest();
           
 
         }
@@ -41,6 +42,14 @@ namespace ConsoleUI
                 RentDate = DateTime.Now,
                 ReturnDate = DateTime.Now.AddDays(1)
             });
+        }
+        private static void DetailTest()
+        {
+            CarManager carManager = new CarManager(new EfCarDal());
+            foreach (var car in carManager.GetCarDetails().Data)
+            {
+                Console.WriteLine("Marka : " + car.CarName + "-" + car.BrandName + "  " + "Renk : " + car.ColorName + "  " + "Fiyat : " + car.DailyPrice);
+            }
         }
     }
 }
