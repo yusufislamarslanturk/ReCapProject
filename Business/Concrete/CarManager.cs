@@ -2,7 +2,9 @@
 using Business.BusinessAspects.Autofac;
 using Business.Constans;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
+using Core.Aspects.Performance;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.InMemory;
@@ -27,6 +29,7 @@ namespace Business.Concrete
        
         [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Add(Car car)
         {
             _carDal.Add(car);
@@ -40,6 +43,7 @@ namespace Business.Concrete
 
             return new SuccessResult(Messages.DeletedCar);
         }
+        [CacheAspect]
 
         public IDataResult<List<Car>> GetAll()
         {
@@ -74,7 +78,9 @@ namespace Business.Concrete
 
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
         }
-
+        [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.Get")]
+        [PerformanceAspect(50)]
         public IResult Update(Car car)
         {
             if (car.DailyPrice < 0)
