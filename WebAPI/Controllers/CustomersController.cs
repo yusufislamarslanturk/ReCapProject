@@ -11,51 +11,51 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BrandsController : ControllerBase
+    public class CustomersController : ControllerBase
     {
-        IBrandService _brandService;
+        ICustomerService _customerService;
+        public CustomersController(ICustomerService customerService)
+        {
+            _customerService = customerService;
+        }
 
-        public BrandsController(IBrandService brandService)
-        {
-            _brandService = brandService;
-        }
         [HttpGet("getall")]
-        public IActionResult Get()
+        public IActionResult GetAll()
         {
-            var result = _brandService.GetAll();
+            var result = _customerService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
+
         [HttpGet("getbyid")]
-        public IActionResult Get(int id)
+        public IActionResult GetById(int id)
         {
-            var result = _brandService.GetById(id);
+            var result = _customerService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
         [HttpPost("add")]
-
-        public IActionResult Post(Brand brand)
+        public IActionResult Add(Customer customer)
         {
-            var result = _brandService.Add(brand);
+            var result = _customerService.Add(customer);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
+
         [HttpPost("delete")]
-
-        public IActionResult Delete(Brand brand)
+        public IActionResult Delete(Customer customer)
         {
-            var result = _brandService.Delete(brand);
+            var result = _customerService.Delete(customer);
             if (result.Success)
             {
                 return Ok(result);
@@ -63,19 +63,15 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPut("update")]
-
-        public IActionResult Update(Brand brand)
+        [HttpPost("update")]
+        public IActionResult Update(Customer customer)
         {
-            var result = _brandService.Update(brand);
+            var result = _customerService.Update(customer);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-
-       
-       
     }
 }

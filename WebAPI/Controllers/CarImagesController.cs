@@ -23,10 +23,10 @@ namespace WebAPI.Controllers
 
 
 
-        //Used add naming to understand
+      
         [HttpPost("add")]
         //Used CarImage to added entity for database
-        public IActionResult Add([FromForm] IFormFile file, [FromForm] CarImages carImage)
+        public IActionResult Add([FromForm] IFormFile file, [FromForm] CarImage carImage)
         {
             //carimage coming from UI then added the system
             var result = _carImageService.Add(file, carImage);
@@ -39,7 +39,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("update")]
-        public IActionResult Update([FromForm] IFormFile file, [FromForm] CarImages carImage)
+        public IActionResult Update([FromForm] IFormFile file, [FromForm] CarImage carImage)
         {
             var result = _carImageService.Update(file, carImage);
             if (result.Success)
@@ -51,9 +51,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("delete")]
-        public IActionResult Delete(CarImages carImage)
+        public IActionResult Delete(CarImage carImage)
         {
-            var carDeleteImage = _carImageService.GetById(carImage.CarImageId).Data;
+            var carDeleteImage = _carImageService.GetById(carImage.id).Data;
 
             var result = _carImageService.Delete(carDeleteImage);
 
@@ -88,6 +88,7 @@ namespace WebAPI.Controllers
         }
         [HttpGet("getimagebycarid")]
         public IActionResult GetImagesByCarId(int carId)
+        
         {
             var result = _carImageService.GetImagesByCarId(carId);
             if (result.Success)

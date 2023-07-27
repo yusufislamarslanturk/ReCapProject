@@ -38,7 +38,7 @@ namespace Business.Concrete
 
         public IDataResult<User> Login(UserForLoginDto userForLoginDto)
         {
-            var userToCheck = _userService.GetByMail(userForLoginDto.Email);
+            var userToCheck = _userService.GetByEmail(userForLoginDto.Email);
             if (userToCheck == null)
             {
                 return new ErrorDataResult<User>("Kullanıcı bulunamadı");
@@ -54,7 +54,7 @@ namespace Business.Concrete
 
         public IResult UserExists(string email)
         {
-            if (_userService.GetByMail(email) != null)
+            if (_userService.GetByEmail(email) != null)
             {
                 return new ErrorResult("Kullanıcı mevcut");
             }
