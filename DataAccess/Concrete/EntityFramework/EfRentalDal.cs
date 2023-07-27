@@ -10,31 +10,29 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfRentalDal : EfEntityRepositoryBase<Rental,CarsDBContext>, IRentalDal
+
+    public class EfRentalDal : EfEntityRepositoryBase<Rental, CarsDBContext>, IRentalDal
     {
         public List<RentalDetailDto> GetRentalDetails()
         {
             using (CarsDBContext context = new CarsDBContext())
             {
                 var result = from r in context.rentals
-                             join c in context.cars
-                             on r.CarId equals c.CarId
-                             join ct in context.customers
-                             on r.CustomerId equals ct.CustomerId
                              join u in context.users
-                             on ct.UserId equals u.Id
-                             select new RentalDetailDto
+                                 on r.CustomerId equals u.Id
+                             join c in context.cars
+                                 on r.CarId equals c.CarId
+
+                             select new RentalDetailDto()
                              {
-                                 RentalId = r.RentalId,
-                                 CarName = c.CarName,
-                                 DailyPrice = c.DailyPrice,
+                                 Description = c.Description,
                                  FirstName = u.FirstName,
                                  LastName = u.LastName,
-                                 Email = u.Email,
-                                 CompanyName = ct.CompanyName
+                                 RentDate = r.RentDate,
+                                 ReturnDate = r.ReturnDate
                              };
                 return result.ToList();
             }
         }
-    }
-}
+
+    }}

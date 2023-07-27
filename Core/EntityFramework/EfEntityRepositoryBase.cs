@@ -52,6 +52,16 @@ namespace Core.EntityFramework
             }
         }
 
+        public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null, string carsListed = null)
+        {
+            using (TContext context = new TContext())
+            {
+                return filter == null
+                    ? context.Set<TEntity>().ToList()
+                    : context.Set<TEntity>().Where(filter).ToList();
+            }
+        }
+
         public void Update(TEntity entity)
         {
             using (TContext context = new TContext())

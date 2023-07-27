@@ -49,6 +49,7 @@ namespace Business.Constans
         public static string CarImageLimitReached = "bir araç için maksimum sayıda yükleme yaptınız.";
 
         public static string CarImageAlreadyHave = "Bu resim daha önce eklenmişti.";
+        public static string rentallisted = "listelendi";
 
         public static string UserRegistered = "kullanıcı kaydoldu";
         public static string UserNotFound = "kullanıcı bulunamadı";
@@ -57,5 +58,21 @@ namespace Business.Constans
         public static string UserAlreadyExists = "kullanıcı zaten var";
         public static string AccessTokenCreated = "token olusturuldu.";
         public static string AuthorizationDenied = "Yetkiniz yok";
+        internal static string RentalByIdListed = "id ye göre listelendi";
+        internal static string RentalDeleted = "silindi";
+        internal static string RentalAdded = "eklendi";
+        internal static string RentalDetailsListed = "listelendi";
+
+        public static string RentalUpdated = "rental güncellendi";
+        public static string RentalsListed = "rental listelendi";
+        public static string RentalInvalid = "rental geçersiz";
+        internal static string CustomerByIdListed="customer id ye göre listelendi ";
+        internal static string CustomersListed="customer listelendi";
+        internal static string CustomerUpdated="güncellendi";
+        internal static string UserUpdated="kullanıcı güncellendi";
+        internal static string UserAdded="kullanıcı eklendi";
+        internal static string UserDeleted="kullanıcılar silindi";
+        internal static string UsersListed="kullanıcılar listelendi";
+        internal static string UserByIdListed="kullanıcı id ye göre listelendi";
     }
 }
