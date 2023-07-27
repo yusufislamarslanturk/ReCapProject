@@ -20,37 +20,29 @@ namespace WebAPI.Controllers
             _carService = carService;
         }
         [HttpGet("getall")]
-        public IActionResult GetAll()
+        public IActionResult Get()
         {
             var result = _carService.GetAll();
             if (result.Success)
             {
-                return Ok(result);
+                return Ok(result.Data);
             }
-            return BadRequest(result);
-        }
-        [HttpGet("getcardetail")]
-        public IActionResult GetCarDetail()
-        {
-            var result = _carService.GetCarDetail();
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
+            return BadRequest(result.Message);
         }
         [HttpGet("getbyid")]
-        public IActionResult GetById(int carId)
+        public IActionResult Get(int id)
         {
-            var result = _carService.GetCarDetailByCarId(carId);
+            var result = _carService.GetById(id);
             if (result.Success)
             {
-                return Ok(result);
+                return Ok(result.Data);
             }
-            return BadRequest(result);
+            return BadRequest(result.Message);
         }
+
         [HttpPost("add")]
-        public IActionResult Add(Car car)
+
+        public IActionResult Post(Car car)
         {
             var result = _carService.Add(car);
             if (result.Success)
@@ -59,35 +51,65 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        [HttpGet("getbybrand")]
-        public IActionResult GetByBrand(int brandId)
+        [HttpPost("delete")]
+
+        public IActionResult Delete(Car car)
         {
-            var result = _carService.GetCarDetailByBrandId(brandId);
+            var result = _carService.Delete(car);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        [HttpGet("getsbycolor")]
-        public IActionResult GetByColor(int colorId)
+
+        [HttpPut("update")]
+
+        public IActionResult Update(Car car)
         {
-            var result = _carService.GetCarDetailByColorId(colorId);
+            var result = _carService.Update(car);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        [HttpGet("getbycolorandbrand")]
-        public IActionResult GetByColorAndBrand(int brandId, int colorId)
+
+        [HttpGet("getbydailyprice")]
+        public IActionResult Get(decimal min,decimal max)
         {
-            var result = _carService.GetCarDetailByColorAndBrandId(brandId, colorId);
+            var result = _carService.GetByDailyPrice(min,max);
             if (result.Success)
             {
-                return Ok(result);
+                return Ok(result.Data);
             }
-            return BadRequest(result);
+            return BadRequest(result.Message);
         }
+        //GetCarDetails
+        [HttpGet("getcardetails")]
+        public IActionResult Get2()
+        {
+            var result = _carService.GetCarDetails();
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Message);
+
+        }
+        //GetAllByCategoryId
+        [HttpGet("getallbycategoryid")]
+
+        public IActionResult GetAllbyCategoryId(int id)
+        {
+            var result = _carService.GetAllByCategoryId(id);
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Message);
+
+        }
+
     }
 }

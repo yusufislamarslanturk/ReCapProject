@@ -1,5 +1,4 @@
 ﻿using Business.Abstract;
-using Business.Constans;
 using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -14,52 +13,28 @@ namespace Business.Concrete
 {
     public class UserManager : IUserService
     {
-        IUserDal _user;
+        IUserDal _userDal;
 
-        public UserManager(IUserDal user)
+        public UserManager(IUserDal userDal)
         {
-            _user = user;
-        }
-
-        public IResult Add(User user)
-        {
-            _user.Add(user);
-            return new SuccessResult(Messages.UserAdded);
-        }
-
-        public IResult Delete(User user)
-        {
-            _user.Delete(user);
-            return new SuccessResult(Messages.UserDeleted);
-        }
-
-        public IDataResult<List<User>> GetAll()
-        {
-            return new SuccessDataResult<List<User>>(_user.GetAll(), Messages.UsersListed);
-        }
-
-        public User GetByEmail(string email)
-        {
-            var result = _user.Get(u => u.Email == email);
-            return result;
-        }
-
-        public IDataResult<User> GetById(int userId)
-        {
-            return new SuccessDataResult<User>(_user.Get(u => u.Id == userId), Messages.UserByIdListed);
+            _userDal = userDal;
         }
 
         public List<OperationClaim> GetClaims(User user)
         {
-            var result = _user.GetClaims(user);
-            return result;
+            return _userDal.GetClaims(user);
         }
 
-        public IResult Update(User user)
+        public void Add(User user)
         {
-            _user.Update(user);
-            return new SuccessResult(Messages.UserUpdated);
+            _userDal.Add(user);
         }
-      
+
+        public User GetByMail(string email)
+        {
+            return _userDal.Get(u => u.Email == email);
+        }
     }
 }
+
+

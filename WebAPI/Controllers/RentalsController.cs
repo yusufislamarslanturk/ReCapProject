@@ -25,16 +25,6 @@ namespace WebAPI.Controllers
             var result = _rentalService.GetAll();
             if (result.Success)
             {
-                return Ok(result);
-            }
-            return BadRequest(result.Message);
-        }
-        [HttpGet("getdetails")]
-        public IActionResult Get2()
-        {
-            var result = _rentalService.GetRentalDetails();
-            if (result.Success)
-            {
                 return Ok(result.Data);
             }
             return BadRequest(result.Message);
@@ -86,9 +76,18 @@ namespace WebAPI.Controllers
         }
 
        
-    
+        //GetCarDetails
+        [HttpGet("getcardetails")]
+        public IActionResult Get2()
+        {
+            var result = _rentalService.RentalDetails();
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Message);
 
-        
+        }
         //GetAllByCategoryId
         [HttpGet("getbyid")]
 

@@ -13,9 +13,9 @@ namespace Business.ValidationRules.FluentValidation
         public CarValidator()
         {
             RuleFor(p => p.BrandId).LessThan(5);
-            RuleFor(p => p.Model).MinimumLength(2);
+            RuleFor(p => p.CarName).MinimumLength(2);
             RuleFor(p => p.DailyPrice).GreaterThan(0);
-            RuleFor(p => p.Model).Must(StartWithsB).WithMessage("Ürün B Harfi ile başlamıyor");
+            RuleFor(p => p.CarName).Must(StartWithsB).WithMessage("Ürün B Harfi ile başlamıyor");
         }
 
         private bool StartWithsB(string arg)
